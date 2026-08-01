@@ -1,0 +1,285 @@
+/* =========================================================
+   GARIMPO DA CASA — Landing page de bio (afiliado Mercado Livre)
+   Paleta: fundo branco + amarelo Mercado Livre (#FFE600)
+   ========================================================= */
+
+/* ----- Reset básico ----- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth; /* rolagem suave */
+}
+
+:root {
+  --amarelo: #ffe600;
+  --amarelo-escuro: #e6ce00;
+  --preto: #1a1a1a;
+  --cinza-texto: #6b6b6b;
+  --cinza-claro: #f7f7f7;
+  --borda-radius: 16px;
+  --sombra: 0 4px 20px rgba(0, 0, 0, 0.06);
+  --sombra-hover: 0 8px 28px rgba(0, 0, 0, 0.12);
+}
+
+body {
+  font-family: "Poppins", -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: #ffffff;
+  color: var(--preto);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  padding-bottom: 40px;
+}
+
+/* respeita preferências de movimento reduzido */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ----- Animação de entrada (fade-in) ----- */
+.fade-in {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* escalona a entrada dos cards de produto */
+.product-card:nth-child(1) { animation-delay: 0.15s; }
+.product-card:nth-child(2) { animation-delay: 0.25s; }
+.product-card:nth-child(3) { animation-delay: 0.35s; }
+.product-card:nth-child(4) { animation-delay: 0.45s; }
+.footer { animation-delay: 0.55s; }
+
+/* ===================== CABEÇALHO ===================== */
+.profile {
+  max-width: 480px;
+  margin: 48px auto 24px;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.profile-photo {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--amarelo);
+  box-shadow: var(--sombra);
+}
+
+.profile-name {
+  margin-top: 16px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.profile-bio {
+  margin-top: 8px;
+  font-size: 0.95rem;
+  color: var(--cinza-texto);
+  font-weight: 400;
+}
+
+.social-icons {
+  margin-top: 14px;
+}
+
+.social-icons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--cinza-claro);
+  color: var(--preto);
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.social-icons a:hover {
+  background: var(--amarelo);
+  transform: translateY(-2px);
+}
+
+/* ===================== ÁREA DOS LINKS ===================== */
+.links-container {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.product-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #ffffff;
+  border: 1px solid #eeeeee;
+  border-radius: var(--borda-radius);
+  padding: 14px;
+  box-shadow: var(--sombra);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.product-card:hover {
+  box-shadow: var(--sombra-hover);
+  transform: translateY(-3px);
+}
+
+.product-image {
+  width: 72px;
+  height: 72px;
+  border-radius: 12px;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: var(--cinza-claro);
+}
+
+.product-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.product-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.product-desc {
+  font-size: 0.85rem;
+  color: var(--cinza-texto);
+  margin-bottom: 10px;
+}
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--amarelo);
+  color: var(--preto);
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 999px; /* botão arredondado */
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.cta-button i {
+  font-size: 0.75rem;
+}
+
+.cta-button:hover {
+  background: var(--amarelo-escuro);
+  transform: scale(1.04);
+}
+
+.cta-button:active {
+  transform: scale(0.97);
+}
+
+/* ===================== RODAPÉ ===================== */
+.footer {
+  max-width: 480px;
+  margin: 36px auto 0;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.footer p {
+  font-size: 0.75rem;
+  color: #a0a0a0;
+}
+
+.footer-year {
+  margin-top: 6px;
+}
+
+/* ===================== BOTÕES FLUTUANTES ===================== */
+.float-btn {
+  position: fixed;
+  right: 20px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  box-shadow: var(--sombra-hover);
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  z-index: 100;
+}
+
+.float-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+}
+
+.whatsapp-btn {
+  bottom: 88px;
+  background: #25d366;
+  color: #ffffff;
+}
+
+.back-to-top {
+  bottom: 20px;
+  background: var(--amarelo);
+  color: var(--preto);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* foco visível para acessibilidade (navegação por teclado) */
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--amarelo-escuro);
+  outline-offset: 2px;
+}
+
+/* ===================== RESPONSIVO ===================== */
+@media (max-width: 380px) {
+  .product-image {
+    width: 60px;
+    height: 60px;
+  }
+
+  .product-title {
+    font-size: 0.9rem;
+  }
+
+  .cta-button {
+    padding: 7px 12px;
+    font-size: 0.8rem;
+  }
+}
