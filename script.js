@@ -1,35 +1,32 @@
-/* =========================================================
-   GARIMPO DA CASA — script.js
-   Pequenas interações: ano no rodapé e botão "voltar ao topo"
-   ========================================================= */
-
 document.addEventListener("DOMContentLoaded", () => {
-  // Atualiza o ano no rodapé automaticamente
-  const yearSpan = document.getElementById("year");
-  if (yearSpan) {
-    yearSpan.textContent = new Date().getFullYear();
+  const year = document.getElementById("year");
+
+  if (year) {
+    year.textContent = new Date().getFullYear();
   }
 
-  // Mostra/esconde o botão "voltar ao topo" conforme o scroll
-  const backToTopBtn = document.getElementById("backToTop");
+  const revealElements = document.querySelectorAll(".reveal");
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  const toggleBackToTop = () => {
-    if (window.scrollY > 300) {
-      backToTopBtn.classList.add("visible");
-    } else {
-      backToTopBtn.classList.remove("visible");
-    }
-  };
+  if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+    revealElements.forEach((element) => element.classList.add("visible"));
+    return;
+  }
 
-  window.addEventListener("scroll", toggleBackToTop);
-  toggleBackToTop(); // checa o estado inicial
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      rootMargin: "0px 0px -8% 0px",
+      threshold: 0.12,
+    },
+  );
 
-  // Ao clicar, rola suavemente até o topo da página
-  backToTopBtn.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
-
-  // Todos os links de produto e redes sociais já abrem em nova aba
-  // via atributo target="_blank" no HTML (mais confiável e acessível
-  // do que forçar isso via JavaScript).
+  revealElements.forEach((element) => observer.observe(element));
 });
